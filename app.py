@@ -180,7 +180,8 @@ if st.session_state.quiz:
         st.markdown(f"### {i+1}. 문제")
         st.write(q["question"])
 
-        if q["choices"]:
+        # ✅ 🔥 여기만 수정됨
+        if q.get("choices"):
             ans = st.radio(
                 "선택하세요",
                 q["choices"],
