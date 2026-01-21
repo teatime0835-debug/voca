@@ -188,11 +188,11 @@ if st.session_state.quiz:
                 random.shuffle(shuffled)
                 st.session_state[f"shuffled_{i}"] = shuffled
 
-        ans = st.radio(
-            "선택하세요",
-            st.session_state[f"shuffled_{i}"],
-            key=f"q_{i}"
-        )
+            ans = st.radio(
+                "선택하세요",
+                st.session_state[f"shuffled_{i}"],
+                key=f"q_{i}"
+            )
 
         else:
             ans = st.text_input("답을 입력하세요", key=f"q_{i}")
@@ -216,4 +216,5 @@ if st.session_state.quiz:
         st.success(
             f"🎉 점수: {st.session_state.score} / {len(st.session_state.quiz)}"
         )
+
 
