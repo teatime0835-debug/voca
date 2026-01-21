@@ -182,11 +182,18 @@ if st.session_state.quiz:
 
         # ✅ 🔥 여기만 수정됨
         if q.get("choices"):
-            ans = st.radio(
-                "선택하세요",
-                q["choices"],
-                key=f"q_{i}"
-            )
+            # 🔀 선택지 셔플 (문제별 1회만)
+            if f"shuffled_{i}" not in st.session_state:
+                shuffled = q["choices"][:]
+                random.shuffle(shuffled)
+                st.session_state[f"shuffled_{i}"] = shuffled
+
+        ans = st.radio(
+            "선택하세요",
+            st.session_state[f"shuffled_{i}"],
+            key=f"q_{i}"
+        )
+
         else:
             ans = st.text_input("답을 입력하세요", key=f"q_{i}")
 
@@ -209,3 +216,4 @@ if st.session_state.quiz:
         st.success(
             f"🎉 점수: {st.session_state.score} / {len(st.session_state.quiz)}"
         )
+
